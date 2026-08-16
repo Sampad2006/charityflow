@@ -1,11 +1,59 @@
 # CharityFlow
 
-Decentralized AI-driven aid allocation on Stellar (Soroban).
+Decentralized, AI-driven aid allocation on **Stellar (Soroban)**.
 
 Donors fund a **CharityEscrow** Soroban contract. A registered **AI agent** analyzes crisis
 feeds and proposes transparent, auditable disbursements — every action recorded as an on-chain
 event. Access control lives in a second contract, **AgentRegistry**, which the escrow calls
 cross-contract before any payout.
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?logo=vercel)](https://charityflow-nine.vercel.app)
+
+---
+
+## Live demo
+
+The production build runs on Vercel against the **live testnet contracts**:
+
+**→ https://charityflow-nine.vercel.app**
+
+> Connect a Stellar wallet (Freighter, Albedo, Hana, or Rabet), deposit into the escrow, run
+> the AI agent over a crisis scenario, and authorize a payout — all on the Stellar testnet.
+
+## Deployed contracts (testnet)
+
+| Contract | Address |
+| --- | --- |
+| **AgentRegistry** (disburser authorization) | [`CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) |
+| **CharityEscrow** (funds lockup) | [`CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
+| **NGO recipient wallet** | [`GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU`](https://stellar.expert/explorer/testnet/account/GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU) |
+
+## Verified on-chain transactions
+
+The complete donate → AI-disburse flow, recorded on the Stellar testnet ledger and verifiable
+on [Stellar Expert](https://stellar.expert):
+
+| Event | Amount | Ledger | Transaction hash |
+| --- | --- | --- | --- |
+| Deposit (escrow) | 202 XLM | 4171863 | [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) |
+| **Payout (AI agent)** | **202 XLM** | **4171958** | [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
+
+The escrow currently holds `0.00002 XLM` — the `202 XLM` deposit was fully disbursed by the
+authorized AI agent to the NGO recipient.
+
+## Screenshots
+
+> Add these after capturing them — all required for submission.
+
+| | |
+| --- | --- |
+| Wallet connected + balance | `docs/screenshots/wallet-connected.png` |
+| Successful deposit + result | `docs/screenshots/deposit-tx.png` |
+| AI payout proposal + result | `docs/screenshots/payout-tx.png` |
+| Wallet options modal | `docs/screenshots/wallet-options.png` |
+| Mobile view | `docs/screenshots/mobile.png` |
+| CI/CD run (green) | `docs/screenshots/ci-cd.png` |
+| Test output (3+ passing) | `docs/screenshots/tests.png` |
 
 ## Features
 
@@ -19,7 +67,7 @@ cross-contract before any payout.
 - **Multi-wallet:** Freighter, Albedo, Hana, and Rabet via `@creit.tech/stellar-wallets-kit`.
 - **Simulation mode:** runs out of the box with zero configuration (no contracts deployed, no
   wallet extensions) — ideal for demos and tests.
-- **Dark premium UI:** Tailwind CSS, glassmorphism, gradient accents.
+- **Dark premium UI:** Tailwind CSS, glassmorphism, gradient accents. Mobile-responsive.
 
 ## Architecture
 
@@ -143,6 +191,9 @@ Start `npm run dev` — the header badge switches from **Simulation** to **Live 
 Donations invoke `deposit` on-chain; the AI agent's payouts are signed locally with the
 demo agent key and authorized by the registry cross-contract call.
 
+> The deployed Vercel instance runs with these values already set (see
+> [Deployed contracts](#deployed-contracts-testnet) above).
+
 ## Configuration
 
 | Variable | Default | Purpose |
@@ -166,6 +217,13 @@ npm test                 # Vitest: frontend flows (connect → donate → AI →
 npm run lint             # ESLint (flat config)
 npm run build            # Production build
 ```
+
+## CI/CD
+
+`.github/workflows/ci-cd.yml` runs on every push/PR to `main`:
+
+- **contracts** — `cargo test --workspace` + release build
+- **frontend** — `npm install`, lint, unit tests, production build
 
 ## Security notes
 
