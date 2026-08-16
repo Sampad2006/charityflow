@@ -1,0 +1,40 @@
+{
+  "name": "charityflow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CharityFlow - Decentralized AI-driven aid allocation dashboard on Stellar (Soroban)",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:contracts": "cargo test --manifest-path contracts/Cargo.toml"
+  },
+  "dependencies": {
+    "@creit.tech/stellar-wallets-kit": "^2.5.0",
+    "@stellar/stellar-sdk": "^16.2.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.11.0",
+    "jsdom": "^30.0.1",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10"
+  }
+}
