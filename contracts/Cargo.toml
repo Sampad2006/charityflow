@@ -1,0 +1,21 @@
+[workspace]
+members = ["agent-registry", "charity-escrow"]
+resolver = "2"
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.75"
+
+[workspace.dependencies]
+soroban-sdk = { version = "27.0.6" }
+
+[profile.release]
+opt-level = "s"
+overflow-checks = true
+debug = 0
+codegen-units = 1
+lto = "fat"
+
+[profile.dev]
+overflow-checks = true
