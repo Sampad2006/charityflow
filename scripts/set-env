@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Usage: set-env KEY=VALUE [KEY=VALUE...]
+# Sets KEY=VALUE in the project .env (creating the file if missing).
+set -euo pipefail
+
+ENV_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/.env"
+
+for kv in "$@"; do
+  key="${kv%%=*}"
+  value="${kv#*=}"
+  if [ -f "$ENV_FILE" ]; then
+    awk -v k="$key" -v v="$value" '
+      $0 ~ "^" k "=" { print k "=" v; done=1; next }
+      { print }
+      END { if (!done) print k "=" v }
+    ' "$ENV_FILE" > "$ENV_FILE.tmp"
+    mv "$ENV_FILE.tmp" "$ENV_FILE"
+  else
+    printf '%s=%s\n' "$key" "$value" > "$ENV_FILE"
+  fi
+done
