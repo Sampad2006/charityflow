@@ -5,6 +5,7 @@
 CharityFlow replaces bureaucratic charity overhead with mathematical certainty. Donors fund a **`CharityEscrow`** Soroban smart contract. An autonomous, registered **AI agent** monitors real-time global crisis feeds and proposes transparent, auditable disbursements — every single action is recorded as an immutable on-chain event. Access control is enforced via a secondary contract, **`AgentRegistry`**, which the escrow invokes cross-contract before authorizing any payout.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://charityflow-nine.vercel.app)
+[![Video Demo](https://img.shields.io/badge/Video%20Demo-YouTube-FF0000?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=lLl-5hIlJe4)
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-1B1E2B?style=for-the-badge&logo=stellar)](https://stellar.org)
 [![Soroban](https://img.shields.io/badge/Soroban-Smart%20Contracts-7D00FF?style=for-the-badge)](https://soroban.stellar.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -13,7 +14,7 @@ CharityFlow replaces bureaucratic charity overhead with mathematical certainty. 
 
 ## 📑 Table of Contents
 
-- [⚡ Live Demo](#-live-demo)
+- [⚡ Live Demo & Video Walkthrough](#-live-demo--video-walkthrough)
 - [📜 Deployed Contracts & Testnet Verification](#-deployed-contracts--testnet-verification)
 - [✨ Key Features](#-key-features)
 - [🖼️ Product Tour](#️-product-tour)
@@ -27,11 +28,12 @@ CharityFlow replaces bureaucratic charity overhead with mathematical certainty. 
 
 ---
 
-## ⚡ Live Demo
+## ⚡ Live Demo & Video Walkthrough
 
-The production application is deployed on Vercel and connected directly to the **live Stellar testnet contracts**:
+- 🌐 **Live Web Application:** [https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app)
+- 📺 **Video Walkthrough:** [https://www.youtube.com/watch?v=lLl-5hIlJe4](https://www.youtube.com/watch?v=lLl-5hIlJe4)
 
-👉 **[https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app)**
+[![CharityFlow Demo Video](https://img.youtube.com/vi/lLl-5hIlJe4/maxresdefault.jpg)](https://www.youtube.com/watch?v=lLl-5hIlJe4)
 
 > Connect any supported Stellar wallet (Freighter, Albedo, Hana, or Rabet), deposit into the escrow, run the AI agent over a crisis scenario, and authorize a payout — all verified on the Stellar testnet ledger.
 
