@@ -1,139 +1,184 @@
-# CharityFlow
+# 🌍 CharityFlow
 
-Decentralized, AI-driven aid allocation on **Stellar (Soroban)**.
+> **Decentralized, AI-driven aid allocation and humanitarian escrow on Stellar (Soroban).**
 
-Donors fund a **CharityEscrow** Soroban contract. A registered **AI agent** analyzes crisis
-feeds and proposes transparent, auditable disbursements — every action recorded as an on-chain
-event. Access control lives in a second contract, **AgentRegistry**, which the escrow calls
-cross-contract before any payout.
+CharityFlow replaces bureaucratic charity overhead with mathematical certainty. Donors fund a **`CharityEscrow`** Soroban smart contract. An autonomous, registered **AI agent** monitors real-time global crisis feeds and proposes transparent, auditable disbursements — every single action is recorded as an immutable on-chain event. Access control is enforced via a secondary contract, **`AgentRegistry`**, which the escrow invokes cross-contract before authorizing any payout.
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?logo=vercel)](https://charityflow-nine.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://charityflow-nine.vercel.app)
+[![Stellar](https://img.shields.io/badge/Stellar-Testnet-1B1E2B?style=for-the-badge&logo=stellar)](https://stellar.org)
+[![Soroban](https://img.shields.io/badge/Soroban-Smart%20Contracts-7D00FF?style=for-the-badge)](https://soroban.stellar.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
-## Live demo
+## 📑 Table of Contents
 
-The production build runs on Vercel against the **live testnet contracts**:
+- [⚡ Live Demo](#-live-demo)
+- [📜 Deployed Contracts & Testnet Verification](#-deployed-contracts--testnet-verification)
+- [✨ Key Features](#-key-features)
+- [🖼️ Product Tour](#️-product-tour)
+- [⚙️ System Architecture](#-system-architecture)
+- [🚀 Quick Start (Zero-Setup Simulation)](#-quick-start-zero-setup-simulation)
+- [🌐 Live Testnet Deployment Guide](#-live-testnet-deployment-guide)
+- [🛠️ Configuration & Environment](#️-configuration--environment)
+- [🧪 Testing & CI/CD](#-testing--cicd)
+- [🔐 Security & Trust Model](#-security--trust-model)
+- [📄 License](#-license)
 
-**→ https://charityflow-nine.vercel.app**
+---
 
-> Connect a Stellar wallet (Freighter, Albedo, Hana, or Rabet), deposit into the escrow, run
-> the AI agent over a crisis scenario, and authorize a payout — all on the Stellar testnet.
+## ⚡ Live Demo
 
-## Deployed contracts (testnet)
+The production application is deployed on Vercel and connected directly to the **live Stellar testnet contracts**:
 
-| Contract | Address |
-| --- | --- |
-| **AgentRegistry** (disburser authorization) | [`CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) |
-| **CharityEscrow** (funds lockup) | [`CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
-| **NGO recipient wallet** | [`GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU`](https://stellar.expert/explorer/testnet/account/GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU) |
+👉 **[https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app)**
 
-## Verified on-chain transactions
+> Connect any supported Stellar wallet (Freighter, Albedo, Hana, or Rabet), deposit into the escrow, run the AI agent over a crisis scenario, and authorize a payout — all verified on the Stellar testnet ledger.
 
-The complete donate → AI-disburse flow, recorded on the Stellar testnet ledger and verifiable
-on [Stellar Expert](https://stellar.expert):
+---
 
-| Event | Amount | Ledger | Transaction hash |
-| --- | --- | --- | --- |
-| Deposit (escrow) | 202 XLM | 4171863 | [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) |
-| **Payout (AI agent)** | **202 XLM** | **4171958** | [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
+## 📜 Deployed Contracts & Testnet Verification
 
-The escrow currently holds `0.00002 XLM` — the `202 XLM` deposit was fully disbursed by the
-authorized AI agent to the NGO recipient.
+### Testnet Addresses
 
-## Screenshots
+| Contract / Account | Role | Address / Explorer Link |
+| :--- | :--- | :--- |
+| **`AgentRegistry`** | Disburser Authorization | [`CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) |
+| **`CharityEscrow`** | Funds Lockup & Payouts | [`CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
+| **NGO Recipient** | Aid Beneficiary Wallet | [`GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU`](https://stellar.expert/explorer/testnet/account/GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU) |
 
-> Add these after capturing them — all required for submission.
+### Verified On-Chain Transactions
 
-| | |
-| --- | --- |
-| Wallet connected + balance | `docs/screenshots/wallet-connected.png` |
-| Successful deposit + result | `docs/screenshots/deposit-tx.png` |
-| AI payout proposal + result | `docs/screenshots/payout-tx.png` |
-| Wallet options modal | `docs/screenshots/wallet-options.png` |
-| Mobile view | `docs/screenshots/mobile.png` |
-| CI/CD run (green) | `docs/screenshots/ci-cd.png` |
-| Test output (3+ passing) | `docs/screenshots/tests.png` |
+The complete **Donate → AI Evaluate → Disburse** flow recorded on the Stellar Testnet:
 
-## Features
+| Action | Amount | Ledger Index | Verified Transaction Hash |
+| :--- | :--- | :--- | :--- |
+| **Deposit (Escrow)** | 202 XLM | 4171863 | [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) |
+| **Payout (AI Agent)** | **202 XLM** | **4171958** | [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
 
-- **Level 1 — Donations:** classic XLM payments *and* native Soroban deposits into the escrow.
-- **Level 2 — AI disbursal:** the agent proposes payout params; only addresses registered in the
-  `AgentRegistry` can disburse (`is_agent` cross-contract check). Insufficient escrow/donor
-  balance is handled and surfaced.
-- **Level 3 — Transparency & automation:** event streaming (Deposit/Payout/Donation) with a live
-  feed, per-step transaction lifecycle UI (pending → signed → broadcasted → success/failed),
-  and an optional Gemini integration for real AI reasoning.
-- **Multi-wallet:** Freighter, Albedo, Hana, and Rabet via `@creit.tech/stellar-wallets-kit`.
-- **Simulation mode:** runs out of the box with zero configuration (no contracts deployed, no
-  wallet extensions) — ideal for demos and tests.
-- **Dark premium UI:** Tailwind CSS, glassmorphism, gradient accents. Mobile-responsive.
+*The `202 XLM` deposit was fully authorized via cross-contract verification and disbursed by the AI agent to the NGO beneficiary address.*
 
-## Architecture
+---
+
+## ✨ Key Features
+
+- **Level 1 — Dual Donation Methods:** Classic XLM payments and native Soroban contract deposits with real-time balance tracking.
+- **Level 2 — AI-Driven Disbursal:** AI crisis agent analyzes severity scores and proposes disbursement parameters. Only agents authorized in `AgentRegistry` can trigger payouts (`is_agent` cross-contract check).
+- **Level 3 — Real-Time Transparency:** Live on-chain event streaming (Deposit/Payout), full per-step transaction lifecycle UI (Pending → Signed → Broadcasted → Success/Error), and Gemini AI reasoning engine with offline rule-based fallback.
+- **Multi-Wallet Support:** Seamless connection with Freighter, Albedo, Hana, and Rabet wallets via `@creit.tech/stellar-wallets-kit`.
+- **Zero-Config Simulation Mode:** Full local Soroban simulation backed by `localStorage` — runs out of the box for testing and demos without requiring network funds.
+- **Modern Responsive UI:** Glassmorphism design system built with Tailwind CSS, micro-interactions, and mobile responsiveness.
+
+---
+
+## 🖼️ Product Tour
+
+### 1. Dashboard & Live Treasury Status
+*Live overview of escrow reserves, historical donations, disbursed totals, and wallet status.*
+![Dashboard](docs/screenshots/dashboard.png)
+
+### 2. Operations Console & Smart Donation
+*Intuitive donation interface supporting both Soroban smart contract deposits and classic XLM transfers.*
+![Donation Console](docs/screenshots/deposit-console.png)
+
+### 3. AI Crisis Agent & Deliberation Engine
+*Interactive crisis simulator where AI evaluates situational severity, explains allocation logic, and prepares disbursements.*
+![AI Intelligence](docs/screenshots/ai-intelligence.png)
+
+### 4. The Ledger of Good (Live Event Feed)
+*Real-time stream of all on-chain contract events with expandable transaction hashes and metadata.*
+![Ledger Feed](docs/screenshots/ledger-feed.png)
+
+### 5. User Guide & Architecture of Trust
+*In-app interactive documentation explaining trustless smart contract governance and automated aid.*
+![User Guide](docs/screenshots/user-guide.png)
+
+---
+
+## ⚙️ System Architecture
+
+```
+┌─────────────────┐       ┌────────────────────────┐       ┌─────────────────┐
+│   Donor Wallet  │ ───>  │  CharityEscrow Contract │ ───>  │  NGO Beneficiary│
+│ (Freighter/etc) │       │   (Holds & Locks Funds)│       │   (Aid Receipt) │
+└─────────────────┘       └───────────┬────────────┘       └─────────────────┘
+                                      │
+                         Cross-Contract Auth Check
+                               (`is_agent`)
+                                      │
+                                      ▼
+┌─────────────────┐       ┌────────────────────────┐
+│ AI Crisis Agent │ ───>  │  AgentRegistry Contract│
+│ (Gemini Engine) │       │  (Role-Based Security) │
+└─────────────────┘       └────────────────────────┘
+```
+
+### Directory Structure
 
 ```
 src/
-├── config.js                 # Env-driven configuration + live/simulation switch
+├── config.js                 # Env-driven configuration + live/simulation toggle
 ├── context/AppContext.jsx    # Global state (wallet, escrow, events, toasts)
-├── components/               # WalletConnect, Dashboard, EscrowConsole,
-│                             # CrisisSimulation, AgentsPanel, EventFeed, ...
-├── contracts/escrowClient.js     # Unified escrow interface (sim + live)
-├── contracts/registryClient.js   # Unified registry interface (sim + live)
+├── components/               # UI components (WalletConnect, EscrowConsole, CrisisSimulation...)
+├── contracts/
+│   ├── escrowClient.js       # Unified escrow client (Simulation + Soroban RPC)
+│   └── registryClient.js     # Unified registry client (Simulation + Soroban RPC)
+├── pages/                    # Multi-page routing (HomePage, LedgerPage, IntelligencePage...)
 └── utils/
-    ├── stellar.js            # Wallets Kit, Horizon, Soroban RPC, tx lifecycle
+    ├── stellar.js            # Stellar Wallets Kit, Horizon client, Soroban RPC
     ├── simulation.js         # In-browser Soroban simulator (localStorage)
-    └── gemini.js             # AI agent (Gemini API + rule-based fallback)
+    └── gemini.js             # AI crisis evaluation (Gemini API + rule-based fallback)
 
 contracts/
-├── agent-registry/           # AgentRegistry Soroban contract
-└── charity-escrow/           # CharityEscrow Soroban contract (16 tests)
+├── agent-registry/           # AgentRegistry Soroban contract (disburser whitelist)
+└── charity-escrow/           # CharityEscrow Soroban contract (cross-contract escrow)
 ```
 
-## Quick start (simulation mode — no setup)
+---
+
+## 🚀 Quick Start (Simulation Mode)
+
+Run the entire application locally with zero setup, zero network dependencies, and no wallet extension requirements:
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Start the development server
 npm run dev
 ```
 
-Open the app, click **Connect Wallet** (a real testnet wallet is still used as your donor
-identity), and:
+1. Open `http://localhost:5173`.
+2. Click **Connect Wallet** (mock identity generated or real testnet wallet detected).
+3. Use the **＋100 XLM demo funds** button on the Dashboard to top up your balance.
+4. Test deposits, run crisis scenarios, and execute payouts locally.
 
-1. **Donate** — `Operations Console → Donate`.
-2. **Run the AI agent** — pick a scenario in the Crisis Simulator, review its proposal.
-3. **Approve & disburse** — watch the payout land in the live event feed.
+---
 
-> Tip: the "＋100 XLM demo funds" button on the Dashboard credits your simulated wallet.
-
-## Live testnet mode
+## 🌐 Live Testnet Deployment Guide
 
 ### Prerequisites
-- The `stellar` CLI (v27+): `curl -fsSL https://deb.nodesource.com/setup_... | sh` or
-  `cargo install stellar-cli --locked` (a `stellar` binary is already available on this machine).
-- A **testnet wallet** funded with test XLM. Fund any address via the friendbot:
-  `curl "https://friendbot.stellar.org?addr=<G...>"`, or in the
-  [Stellar Laboratory](https://laboratory.stellar.org/#account-creator?network=test).
-- `testnet` network already configured: `stellar network ls` should list it.
+- Node.js (v18+) & Rust with `wasm32v1-none` target
+- [Stellar CLI](https://developers.stellar.org/docs/tools/developer-tools/cli/install-and-build) installed (`stellar --version`)
+- A funded Stellar Testnet account ([Stellar Friendbot](https://friendbot.stellar.org))
 
-### 1. Build the contracts
+### 1. Build Smart Contracts
 
 ```bash
-cd contracts
-stellar contract build          # run inside contracts/agent-registry
-stellar contract build          # run inside contracts/charity-escrow
+cd contracts/agent-registry
+stellar contract build
+
+cd ../charity-escrow
+stellar contract build
 ```
 
-> The escrow crate imports the registry's wasm spec via `contractimport!`
-> (`contracts/charity-escrow/specs/agent_registry.wasm`). If you change the
-> **registry** contract, rebuild it and re-copy the wasm:
+> **Note:** `CharityEscrow` imports the registry wasm spec via `contractimport!`. If you modify `agent-registry`, rebuild and copy the updated wasm:
 > `cp target/wasm32v1-none/release/agent_registry.wasm charity-escrow/specs/`
 
-### 2. Deploy the contracts
-
-Set `SOURCE` to your funded wallet's **secret key** and run:
+### 2. Deploy Contracts to Testnet
 
 ```bash
-cd contracts
+SOURCE="<YOUR_TESTNET_SECRET_KEY>"
 
 # Deploy AgentRegistry
 stellar contract deploy \
@@ -141,7 +186,6 @@ stellar contract deploy \
   --source-account "$SOURCE" \
   --network testnet \
   --alias agent-registry
-# → prints C...AGENT_REGISTRY_ID
 
 # Deploy CharityEscrow
 stellar contract deploy \
@@ -149,89 +193,95 @@ stellar contract deploy \
   --source-account "$SOURCE" \
   --network testnet \
   --alias charity-escrow
-# → prints C...CHARITY_ESCROW_ID
 ```
 
-The contract IDs are also saved as aliases — `stellar contract id --alias agent-registry`
-and `stellar contract id --alias charity-escrow` recall them anytime.
-
-### 3. Initialize
+### 3. Initialize Contracts & Set Roles
 
 ```bash
 REGISTRY=$(stellar contract id --alias agent-registry)
 ESCROW=$(stellar contract id --alias charity-escrow)
 XLM_TOKEN=$(stellar contract id asset --asset native --network testnet)
-ADMIN=<your testnet G... public key>
+ADMIN="<YOUR_TESTNET_PUBLIC_KEY>"
+AI_AGENT="GCYXK5W4GFXTILMV3RHAB37ED26RRXY3RKXY5VDE5Y7VT53U3ZQPU7HQ"
 
-# Init the registry (admin = you)
+# 1. Initialize Registry
 stellar contract invoke --id "$REGISTRY" --source-account "$SOURCE" --network testnet \
   -- initialize --admin "$ADMIN"
 
-# Register the AI agent so it may disburse
+# 2. Authorize AI Agent
 stellar contract invoke --id "$REGISTRY" --source-account "$SOURCE" --network testnet \
-  -- add_agent --admin "$ADMIN" --agent GCYXK5W4GFXTILMV3RHAB37ED26RRXY3RKXY5VDE5Y7VT53U3ZQPU7HQ
+  -- add_agent --admin "$ADMIN" --agent "$AI_AGENT"
 
-# Init the escrow bound to the registry + the native XLM asset contract
+# 3. Initialize Escrow with Registry & Native XLM Token
 stellar contract invoke --id "$ESCROW" --source-account "$SOURCE" --network testnet \
   -- initialize --admin "$ADMIN" --registry "$REGISTRY" --token "$XLM_TOKEN"
 ```
 
-### 4. Point the dashboard at them
+### 4. Configure Frontend
 
-```bash
-cp .env.example .env
+Create `.env` based on `.env.example`:
+
+```env
+VITE_REGISTRY_CONTRACT_ID=CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D
+VITE_ESCROW_CONTRACT_ID=CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO
+VITE_NGO_WALLET=GBPH6W2GR5QPSWJIJUJEHLQP3G7AISRJTRSIDOQKNUSOJOXW37BEPLBU
 ```
 
-```bash
-VITE_REGISTRY_CONTRACT_ID=C...AGENT_REGISTRY_ID
-VITE_ESCROW_CONTRACT_ID=C...CHARITY_ESCROW_ID
-```
+Run `npm run dev` — the header indicator will switch to 🟢 **TESTNET LIVE**.
 
-Start `npm run dev` — the header badge switches from **Simulation** to **Live Testnet**.
-Donations invoke `deposit` on-chain; the AI agent's payouts are signed locally with the
-demo agent key and authorized by the registry cross-contract call.
+---
 
-> The deployed Vercel instance runs with these values already set (see
-> [Deployed contracts](#deployed-contracts-testnet) above).
+## 🛠️ Configuration & Environment
 
-## Configuration
+| Environment Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| `VITE_HORIZON_URL` | `https://horizon-testnet.stellar.org` | Stellar Horizon RPC endpoint for accounts/balances |
+| `VITE_SOROBAN_RPC_URL` | `https://soroban-testnet.stellar.org` | Soroban RPC endpoint for contract simulations & events |
+| `VITE_NETWORK_PASSPHRASE` | `Test SDF Network ; September 2015` | Stellar network passphrase |
+| `VITE_REGISTRY_CONTRACT_ID` | — | Deployed `AgentRegistry` Soroban contract address |
+| `VITE_ESCROW_CONTRACT_ID` | — | Deployed `CharityEscrow` Soroban contract address |
+| `VITE_ESCROW_WALLET` | — | Destination address for fallback classic payments |
+| `VITE_AGENT_PUBLIC_KEY` | Demo keypair | Public address of the AI disburser |
+| `VITE_AGENT_SECRET_KEY` | Demo keypair | Testnet-only signing key for browser simulation |
+| `VITE_NGO_WALLET` | Demo NGO address | Default beneficiary wallet for relief disbursements |
+| `VITE_GEMINI_API_KEY` | — | Optional Google Gemini API key for live AI reasoning |
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `VITE_HORIZON_URL` | testnet Horizon | Classic transaction/balance reads |
-| `VITE_SOROBAN_RPC_URL` | testnet RPC | Soroban simulations, invocations, events |
-| `VITE_NETWORK_PASSPHRASE` | testnet | Network passphrase for signing |
-| `VITE_REGISTRY_CONTRACT_ID` | — | AgentRegistry contract id (`C...`) |
-| `VITE_ESCROW_CONTRACT_ID` | — | CharityEscrow contract id (`C...`) |
-| `VITE_ESCROW_WALLET` | — | Destination for classic XLM donations |
-| `VITE_AGENT_PUBLIC_KEY` | demo keypair | The AI agent's signer address |
-| `VITE_AGENT_SECRET_KEY` | demo keypair | Demo-only agent signing (never use in prod) |
-| `VITE_NGO_WALLET` | demo NGO | Default payout recipient |
-| `VITE_GEMINI_API_KEY` | — | Enables Gemini agent; otherwise rule-based |
+---
 
-## Tests
+## 🧪 Testing & CI/CD
+
+### Automated Test Suite
 
 ```bash
-npm run test:contracts   # Rust: 6 registry + 10 escrow tests
-npm test                 # Vitest: frontend flows (connect → donate → AI → disburse)
-npm run lint             # ESLint (flat config)
-npm run build            # Production build
+# Run Rust Soroban contract tests (16 unit & integration tests)
+npm run test:contracts
+
+# Run frontend end-to-end flow tests (Vitest + Testing Library)
+npm test
+
+# Run ESLint check
+npm run lint
+
+# Build production bundle
+npm run build
 ```
 
-## CI/CD
+### CI/CD Pipeline
 
-`.github/workflows/ci-cd.yml` runs on every push/PR to `main`:
+The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that validates on every push and PR:
+- **Rust Contracts Job:** `cargo test --workspace` and WASM release build verification.
+- **Frontend Job:** Dependency installation, linting, Vitest frontend flow execution, and production build.
 
-- **contracts** — `cargo test --workspace` + release build
-- **frontend** — `npm install`, lint, unit tests, production build
+---
 
-## Security notes
+## 🔐 Security & Trust Model
 
-- The demo agent keypair is for **testnet development only**. In production the agent signs
-  server-side and the secret key never touches the browser.
-- Payout authorization is enforced on-chain by the `AgentRegistry` — a compromised frontend
-  cannot authorize a payout.
+- **On-Chain Access Control:** All payout requests must pass cross-contract validation against `AgentRegistry`. A compromised frontend or unauthorized caller cannot disburse funds.
+- **Non-Custodial Escrow:** Funds remain locked in the `CharityEscrow` smart contract until verified criteria are met.
+- **Key Management:** In a production deployment, AI agent keys reside in secure backend key management services (KMS/HSM). Client-side keys are provided strictly for local testnet exploration.
 
-## License
+---
 
-MIT
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
