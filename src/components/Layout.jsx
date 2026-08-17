@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import WalletConnect from './WalletConnect';
+import FeedbackModal from './FeedbackModal';
+import ErrorBoundary from './ErrorBoundary';
 import { useApp } from '../context/AppContext';
 import { CONFIG } from '../config';
 import { shortAddress } from '../context/AppContext';
@@ -7,6 +10,7 @@ import { shortAddress } from '../context/AppContext';
 export default function Layout() {
   const { mode } = useApp();
   const location = useLocation();
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const navLinks = [
     { name: 'Dashboard', path: '/' },
@@ -65,16 +69,29 @@ export default function Layout() {
           })}
         </nav>
 
-        {/* Right Side: Wallet */}
-        <div className="flex flex-1 items-center justify-end gap-4">
+        {/* Right Side: Wallet & Feedback */}
+        <div className="flex flex-1 items-center justify-end gap-3">
+          <button
+            onClick={() => setFeedbackOpen(true)}
+            className="hidden items-center gap-1.5 rounded-full border border-ink-200 bg-paper px-3 py-1.5 text-[11px] font-semibold text-ink-600 transition-colors hover:border-ink-900 hover:text-ink-900 sm:flex"
+            title="Give feedback on the testnet dApp"
+          >
+            <span>💬</span>
+            <span>Feedback</span>
+          </button>
           <WalletConnect />
         </div>
       </header>
 
-      {/* Main Content Area */}
+      {/* Main Content Area with Error Boundary */}
       <main className="mx-auto max-w-[1200px] px-4 pt-12 pb-24 md:px-8">
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
+
+      {/* In-App Feedback Modal */}
+      <FeedbackModal isOpen={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
 
       {/* Footer */}
       <footer className="border-t border-ink-100 py-12 text-center">
