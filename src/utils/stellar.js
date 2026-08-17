@@ -365,3 +365,16 @@ export function scValSymbol(symbol) {
 export function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
+
+// Parse error codes from Soroban RPC responses into human readable text
+export function parseRpcErrorMessage(err) {
+  if (!err) return 'Unknown transaction error';
+  const msg = err.message || String(err);
+  if (msg.includes('HostError') || msg.includes('Error(Contract')) {
+    return 'Smart contract rejected the transaction (authorization or balance issue).';
+  }
+  if (msg.includes('User declined') || msg.includes('rejected')) {
+    return 'Transaction rejected by user in wallet.';
+  }
+  return msg;
+}
