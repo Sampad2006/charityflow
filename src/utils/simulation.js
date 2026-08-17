@@ -73,6 +73,7 @@ class SimulationBackend {
   // ───────────────────────────── ledger helpers ─────────────────────────────
 
   credit(address, amount) {
+    if (typeof amount !== 'number' || amount <= 0) return;
     this.balances[address] = (this.balances[address] || 0) + amount;
   }
 
