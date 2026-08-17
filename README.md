@@ -268,6 +268,18 @@ npm run lint
 npm run build
 ```
 
+#### Frontend Test Execution Output (3 Passing Tests)
+```
+ ✓ tests/frontend.test.jsx (3 tests)
+     ✓ rejects a donation larger than the donor balance
+     ✓ runs the full flow: connect → donate → AI proposes → agent disburses
+     ✓ handles wallet disconnection and reconnection cleanly
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Duration  3.5s
+```
+
 ### CI/CD Pipeline
 
 The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that validates on every push and PR:
@@ -281,6 +293,7 @@ The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that v
 - **On-Chain Access Control:** All payout requests must pass cross-contract validation against `AgentRegistry`. A compromised frontend or unauthorized caller cannot disburse funds.
 - **Non-Custodial Escrow:** Funds remain locked in the `CharityEscrow` smart contract until verified criteria are met.
 - **Key Management:** In a production deployment, AI agent keys reside in secure backend key management services (KMS/HSM). Client-side keys are provided strictly for local testnet exploration.
+- **Zero Secrets in Repository:** No production private keys or API keys are committed. All secrets use environment variables.
 
 ---
 
