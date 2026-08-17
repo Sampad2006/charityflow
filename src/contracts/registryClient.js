@@ -1,3 +1,5 @@
+// In-memory cache for authorized agent lookups
+const agentCache = new Map();
 // High-level client for the AgentRegistry contract.
 //
 // Agent management (add/remove) requires the registry admin, which in live
