@@ -44,3 +44,10 @@ export function explorerUrl(hash) {
 export function accountUrl(address) {
   return `https://stellar.expert/explorer/testnet/account/${address}`;
 }
+
+/**
+ * Helper to validate Soroban Contract ID format (starts with C, 56 chars).
+ */
+export function isValidContractId(id) {
+  return typeof id === 'string' && /^C[A-Z0-9]{55}$/.test(id);
+}
