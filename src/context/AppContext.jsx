@@ -1,3 +1,4 @@
+import { trackEvent } from '../utils/analytics';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import * as stellar from '../utils/stellar';
 import { simulation } from '../utils/simulation';
@@ -88,6 +89,7 @@ export function AppProvider({ children }) {
       setWallet((prev) => ({ ...prev, publicKey, connecting: false }));
       await refreshEscrow(publicKey);
       pushToast({ type: 'success', message: `Connected ${shortAddress(publicKey, 5)}` });
+      trackEvent('wallet_connected', { address: publicKey });
       return publicKey;
     } catch (err) {
       setWallet((prev) => ({ ...prev, connecting: false }));
@@ -98,6 +100,7 @@ export function AppProvider({ children }) {
   const disconnect = useCallback(async () => {
     await stellar.disconnectWallet();
     setWallet({ publicKey: null, nativeBalance: 0, balances: [], connecting: false });
+    trackEvent('wallet_disconnected');
     pushToast({ type: 'info', message: 'Wallet disconnected.' });
   }, [pushToast]);
 
