@@ -21,6 +21,8 @@ contracts/target/
 .vite/
 .eslintcache
 coverage/
+*.tsbuildinfo
+.cache/
 
 # ── Editor / OS ─────────────────────────────────────────────
 .vscode/
