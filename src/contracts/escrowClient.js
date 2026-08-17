@@ -1,3 +1,6 @@
+/**
+ * CharityEscrow unified client for Soroban RPC & local simulation.
+ */
 // High-level client for the CharityEscrow contract.
 //
 // Unifies SIMULATION MODE (no contracts configured) and LIVE TESTNET MODE
