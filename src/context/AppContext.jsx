@@ -1,3 +1,4 @@
+const EVENT_POLL_INTERVAL_MS = 4000;
 import { trackEvent } from '../utils/analytics';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import * as stellar from '../utils/stellar';
