@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { simulation } from '../utils/simulation';
 
 export default function Dashboard() {
+  
   const { mode, wallet, stats, escrowBalance, pushToast } = useApp();
 
   const fundDemo = async () => {
