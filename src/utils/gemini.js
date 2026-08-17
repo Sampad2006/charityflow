@@ -1,3 +1,5 @@
+// Default temperature for reproducible crisis evaluation
+const DEFAULT_TEMPERATURE = 0.2;
 // The CharityFlow AI agent.
 //
 // If `VITE_GEMINI_API_KEY` is configured, the agent calls the Google Gemini
