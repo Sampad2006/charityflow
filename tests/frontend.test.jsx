@@ -125,4 +125,11 @@ describe('CharityFlow simulation dashboard', () => {
       )
     ).toBeInTheDocument();
   });
+
+  it('validates Soroban contract ID format correctly', async () => {
+    const { isValidContractId } = await import('../src/config');
+    expect(isValidContractId('CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO')).toBe(true);
+    expect(isValidContractId('invalid_contract_id')).toBe(false);
+  });
 });
+
