@@ -74,3 +74,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #AAAEAC; /* ink-200 */
 }
+
+/* Micro-interaction polish for modals and buttons */
+.feedback-star-active {
+  transform: scale(1.08);
+  transition: transform 0.15s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.98);
+}
