@@ -96,10 +96,13 @@ The complete **Donate → AI Evaluate → Disburse** flow recorded on the Stella
 *In-app interactive documentation explaining trustless smart contract governance and automated aid.*
 ![User Guide](docs/screenshots/user-guide.png)
 
-### 6. Mobile Responsive Interface
-*Optimized mobile-first design with touch-friendly controls, responsive modals, and real-time ledger updates.*
+### 6. Mobile & Tablet Responsive Interface
+*Optimized mobile-first and tablet responsive layout with touch-friendly controls, responsive navigation, and real-time ledger updates.*
+
 <p align="center">
-  <img src="docs/screenshots/mobile.png" alt="Mobile Responsive UI" width="380" />
+  <img src="docs/screenshots/mobile.png" alt="Mobile Responsive UI" width="340" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/screenshots/tablet.png" alt="Tablet Responsive UI" width="460" />
 </p>
 
 ---
@@ -306,7 +309,7 @@ The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that v
 | **Live Demo Link** | ✅ Verified | [https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app) |
 | **Contract Deployment Addresses** | ✅ Verified | `AgentRegistry`: [`CC3U...`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) <br/> `CharityEscrow`: [`CD6Q...`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
 | **Verified Contract Call Tx Hashes** | ✅ Verified | Deposit: [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) <br/> AI Payout: [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
-| **Mobile Responsive UI** | ✅ Verified | [Mobile View Screenshot](docs/screenshots/mobile.png) • Fluid mobile-first Tailwind design |
+| **Mobile & Tablet Responsive UI** | ✅ Verified | [Mobile View](docs/screenshots/mobile.png) • [Tablet View](docs/screenshots/tablet.png) • Fluid responsive layout |
 | **CI/CD Pipeline Running** | ✅ Verified | [.github/workflows/ci-cd.yml](.github/workflows/ci-cd.yml) |
 | **Test Output (3+ passing tests)** | ✅ Verified | **4/4 passing Vitest tests** + 16 Rust contract tests |
 | **Demo Video Link (1–2 mins)** | ✅ Verified | [YouTube Walkthrough](https://www.youtube.com/watch?v=lLl-5hIlJe4) |
