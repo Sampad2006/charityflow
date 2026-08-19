@@ -23,7 +23,6 @@ CharityFlow replaces bureaucratic charity overhead with mathematical certainty. 
 - [🌐 Live Testnet Deployment Guide](#-live-testnet-deployment-guide)
 - [🛠️ Configuration & Environment](#️-configuration--environment)
 - [🧪 Testing & CI/CD](#-testing--cicd)
-- [✅ Submission Checklist & Verification](#-submission-checklist--criteria-verification)
 - [🔐 Security & Trust Model](#-security--trust-model)
 - [📄 License](#-license)
 
@@ -284,41 +283,49 @@ npm run lint
 npm run build
 ```
 
-#### Frontend Test Execution Output (4 Passing Tests)
+#### Frontend Test Execution Output (6 Passing Tests)
 ```
- ✓ tests/frontend.test.jsx (4 tests)
+ ✓ tests/frontend.test.jsx (6 tests)
      ✓ renders the app shell with treasury and wallet prompt
      ✓ rejects a donation larger than the donor balance
      ✓ runs the full flow: connect → donate → AI proposes → agent disburses
      ✓ validates Soroban contract ID format correctly
+     ✓ formats short address strings correctly
+     ✓ dispatches analytics events cleanly without throwing
 
  Test Files  1 passed (1)
-      Tests  4 passed (4)
-   Duration  2.8s
+      Tests  6 passed (6)
+   Duration  2.7s
+```
+
+#### Smart Contract Test Execution Output (16 Passing Tests)
+```
+running 16 tests
+test test_init ... ok
+test test_deposit_native ... ok
+test test_deposit_accumulates ... ok
+test test_deposit_zero_fails ... ok
+test test_deposit_negative_fails ... ok
+test test_deposit_emits_event ... ok
+test test_request_payout_success ... ok
+test test_request_payout_unauthorized_agent_fails ... ok
+test test_request_payout_insufficient_balance_fails ... ok
+test test_request_payout_zero_amount_fails ... ok
+test test_request_payout_emits_event ... ok
+test test_registry_init ... ok
+test test_registry_add_agent ... ok
+test test_registry_remove_agent ... ok
+test test_registry_non_admin_cannot_manage ... ok
+test test_registry_duplicate_agent_fails ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 ### CI/CD Pipeline
 
 The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that validates on every push and PR:
-- **Rust Contracts Job:** `cargo test --workspace` and WASM release build verification.
-- **Frontend Job:** Dependency installation, linting, Vitest frontend flow execution, and production build.
-
----
-
-## ✅ Submission Checklist & Criteria Verification
-
-| Requirement | Status | Reference / Verification Proof |
-| :--- | :---: | :--- |
-| **Public GitHub Repository** | ✅ Verified | [github.com/Sampad2006/charityflow](https://github.com/Sampad2006/charityflow) |
-| **Complete Documentation** | ✅ Verified | Comprehensive [README.md](README.md) with architecture, setup, and testnet guides |
-| **10+ Meaningful Commits** | ✅ Verified | **43+ commits** recorded across repository history |
-| **Live Demo Link** | ✅ Verified | [https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app) |
-| **Contract Deployment Addresses** | ✅ Verified | `AgentRegistry`: [`CC3U...`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) <br/> `CharityEscrow`: [`CD6Q...`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
-| **Verified Contract Call Tx Hashes** | ✅ Verified | Deposit: [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) <br/> AI Payout: [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
-| **Mobile & Tablet Responsive UI** | ✅ Verified | [Mobile View](docs/screenshots/mobile.png) • [Tablet View](docs/screenshots/tablet.png) • Fluid responsive layout |
-| **CI/CD Pipeline Running** | ✅ Verified | [.github/workflows/ci-cd.yml](.github/workflows/ci-cd.yml) |
-| **Test Output (3+ passing tests)** | ✅ Verified | **4/4 passing Vitest tests** + 16 Rust contract tests |
-| **Demo Video Link (1–2 mins)** | ✅ Verified | [YouTube Walkthrough](https://www.youtube.com/watch?v=lLl-5hIlJe4) |
+- **Rust Contracts Job:** `cargo test --workspace` (16 unit & integration tests) and WASM release build verification.
+- **Frontend Job:** Dependency installation, linting, Vitest frontend flow execution (6/6 tests), and production build.
 
 ---
 

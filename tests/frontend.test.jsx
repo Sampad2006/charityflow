@@ -131,5 +131,17 @@ describe('CharityFlow simulation dashboard', () => {
     expect(isValidContractId('CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO')).toBe(true);
     expect(isValidContractId('invalid_contract_id')).toBe(false);
   });
+
+  it('formats short address strings correctly', async () => {
+    const { shortAddress } = await import('../src/context/AppContext');
+    expect(shortAddress('GABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMN', 6)).toBe('GABCDE…KLMN');
+    expect(shortAddress('')).toBe('');
+    expect(shortAddress('G1234')).toBe('G1234');
+  });
+
+  it('dispatches analytics events cleanly without throwing', async () => {
+    const { trackEvent } = await import('../src/utils/analytics');
+    expect(() => trackEvent('test_event', { key: 'value' })).not.toThrow();
+  });
 });
 
