@@ -99,10 +99,16 @@ The complete **Donate → AI Evaluate → Disburse** flow recorded on the Stella
 ### 6. Mobile & Tablet Responsive Interface
 *Optimized mobile-first and tablet responsive layout with touch-friendly controls, responsive navigation, and real-time ledger updates.*
 
+#### Mobile View
 <p align="center">
   <img src="docs/screenshots/mobile.png" alt="Mobile Responsive UI" width="340" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/screenshots/tablet.png" alt="Tablet Responsive UI" width="460" />
+</p>
+
+<br />
+
+#### Tablet View
+<p align="center">
+  <img src="docs/screenshots/tablet.png" alt="Tablet Responsive UI" width="600" />
 </p>
 
 ---
