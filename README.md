@@ -283,18 +283,19 @@ npm run lint
 npm run build
 ```
 
-#### Frontend Test Execution Output (6 Passing Tests)
+#### Frontend Test Execution Output (7 Passing Tests)
 ```
- ✓ tests/frontend.test.jsx (6 tests)
+ ✓ tests/frontend.test.jsx (7 tests)
      ✓ renders the app shell with treasury and wallet prompt
      ✓ rejects a donation larger than the donor balance
      ✓ runs the full flow: connect → donate → AI proposes → agent disburses
      ✓ validates Soroban contract ID format correctly
      ✓ formats short address strings correctly
      ✓ dispatches analytics events cleanly without throwing
+     ✓ renders the Privacy Policy page correctly
 
  Test Files  1 passed (1)
-      Tests  6 passed (6)
+      Tests  7 passed (7)
    Duration  2.7s
 ```
 

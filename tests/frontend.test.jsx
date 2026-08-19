@@ -8,6 +8,7 @@ import HomePage from '../src/pages/HomePage';
 import LedgerPage from '../src/pages/LedgerPage';
 import IntelligencePage from '../src/pages/IntelligencePage';
 import UserGuidePage from '../src/pages/UserGuidePage';
+import PrivacyPage from '../src/pages/PrivacyPage';
 import ToastContainer from '../src/components/ToastContainer';
 
 // Mock the Stellar SDK layer so no network / wallet extensions are needed.
@@ -45,6 +46,7 @@ const renderApp = () =>
             <Route path="ledger" element={<LedgerPage />} />
             <Route path="intelligence" element={<IntelligencePage />} />
             <Route path="guide" element={<UserGuidePage />} />
+            <Route path="privacy" element={<PrivacyPage />} />
           </Route>
         </Routes>
       </MemoryRouter>
@@ -143,5 +145,16 @@ describe('CharityFlow simulation dashboard', () => {
     const { trackEvent } = await import('../src/utils/analytics');
     expect(() => trackEvent('test_event', { key: 'value' })).not.toThrow();
   });
+
+  it('renders the Privacy Policy page correctly', async () => {
+    const user = userEvent.setup();
+    renderApp();
+    const privacyLink = screen.getByRole('link', { name: /privacy policy/i });
+    expect(privacyLink).toBeInTheDocument();
+    await user.click(privacyLink);
+    expect(await screen.findByRole('heading', { name: 'Privacy Policy' })).toBeInTheDocument();
+    expect(screen.getByText(/Non-Custodial Architecture/i)).toBeInTheDocument();
+  });
 });
+
 

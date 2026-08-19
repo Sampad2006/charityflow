@@ -106,6 +106,10 @@ export default function Layout() {
           <span>Escrow: {shortAddress(CONFIG.escrowContractId || 'Simulated')}</span>
           <span>·</span>
           <span>Registry: {shortAddress(CONFIG.registryContractId || 'Simulated')}</span>
+          <span>·</span>
+          <Link to="/privacy" className="text-ink-400 underline transition-colors hover:text-ink-900">
+            Privacy Policy
+          </Link>
         </div>
       </footer>
     </div>
