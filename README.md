@@ -23,6 +23,7 @@ CharityFlow replaces bureaucratic charity overhead with mathematical certainty. 
 - [🌐 Live Testnet Deployment Guide](#-live-testnet-deployment-guide)
 - [🛠️ Configuration & Environment](#️-configuration--environment)
 - [🧪 Testing & CI/CD](#-testing--cicd)
+- [✅ Submission Checklist & Verification](#-submission-checklist--criteria-verification)
 - [🔐 Security & Trust Model](#-security--trust-model)
 - [📄 License](#-license)
 
@@ -268,16 +269,17 @@ npm run lint
 npm run build
 ```
 
-#### Frontend Test Execution Output (3 Passing Tests)
+#### Frontend Test Execution Output (4 Passing Tests)
 ```
- ✓ tests/frontend.test.jsx (3 tests)
+ ✓ tests/frontend.test.jsx (4 tests)
+     ✓ renders the app shell with treasury and wallet prompt
      ✓ rejects a donation larger than the donor balance
      ✓ runs the full flow: connect → donate → AI proposes → agent disburses
-     ✓ handles wallet disconnection and reconnection cleanly
+     ✓ validates Soroban contract ID format correctly
 
  Test Files  1 passed (1)
-      Tests  3 passed (3)
-   Duration  3.5s
+      Tests  4 passed (4)
+   Duration  2.8s
 ```
 
 ### CI/CD Pipeline
@@ -285,6 +287,23 @@ npm run build
 The repository includes GitHub Actions CI (`.github/workflows/ci-cd.yml`) that validates on every push and PR:
 - **Rust Contracts Job:** `cargo test --workspace` and WASM release build verification.
 - **Frontend Job:** Dependency installation, linting, Vitest frontend flow execution, and production build.
+
+---
+
+## ✅ Submission Checklist & Criteria Verification
+
+| Requirement | Status | Reference / Verification Proof |
+| :--- | :---: | :--- |
+| **Public GitHub Repository** | ✅ Verified | [github.com/Sampad2006/charityflow](https://github.com/Sampad2006/charityflow) |
+| **Complete Documentation** | ✅ Verified | Comprehensive [README.md](README.md) with architecture, setup, and testnet guides |
+| **10+ Meaningful Commits** | ✅ Verified | **43+ commits** recorded across repository history |
+| **Live Demo Link** | ✅ Verified | [https://charityflow-nine.vercel.app](https://charityflow-nine.vercel.app) |
+| **Contract Deployment Addresses** | ✅ Verified | `AgentRegistry`: [`CC3U...`](https://stellar.expert/explorer/testnet/contract/CC3U3E22XIYNWRQ7VAYVRAWAIENLAB4YLK7PGUC2KOL6VRG2Q5G6GZ2D) <br/> `CharityEscrow`: [`CD6Q...`](https://stellar.expert/explorer/testnet/contract/CD6QUPH6HREZFJF6JVPEMDDI5OLKUMXTPVYFSAC7BMX376ZTFHTNEVCO) |
+| **Verified Contract Call Tx Hashes** | ✅ Verified | Deposit: [`5ae70e27…102c9c`](https://stellar.expert/explorer/testnet/tx/5ae70e27febf59609e8370aa67691430c336754f5db1b82bdc4a4dbf90102c9c) <br/> AI Payout: [`902c416a…27f8b1`](https://stellar.expert/explorer/testnet/tx/902c416a7366bd5e79301f3923206fc37085fac0c1780a46e4d3cf754827f8b1) |
+| **Mobile Responsive UI** | ✅ Verified | Fluid Tailwind CSS responsive layout with mobile-first breakpoints and glassmorphism styling |
+| **CI/CD Pipeline Running** | ✅ Verified | [.github/workflows/ci-cd.yml](.github/workflows/ci-cd.yml) |
+| **Test Output (3+ passing tests)** | ✅ Verified | **4/4 passing Vitest tests** + 16 Rust contract tests |
+| **Demo Video Link (1–2 mins)** | ✅ Verified | [YouTube Walkthrough](https://www.youtube.com/watch?v=lLl-5hIlJe4) |
 
 ---
 
